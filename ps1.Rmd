@@ -190,6 +190,7 @@ This task demonstrates how creating new variables that depend on previous time p
 
 ```{r}
 # Your code here
+product_sales_wide %>% mutate(Growth_2021 = (Year_2021 - Year_2020) / Year_2020 * 100, Growth_2022 = (Year_2022 - Year_2021) / Year_2021 * 100)
 ```
 
 2.  **Reshape to Long Format:** Reshape `product_sales_wide` into a long format called `product_sales_long`. Pivot the year columns (`Year_2020`, `Year_2021`, `Year_2022`) into two new columns: `Year` and `Sales`. Make sure `Year` is numeric.
