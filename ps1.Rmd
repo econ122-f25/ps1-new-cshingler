@@ -197,15 +197,20 @@ product_sales_wide %>% mutate(Growth_2021 = (Year_2021 - Year_2020) / Year_2020 
 
 ```{r}
 # Your code here
+product_sales_long <- product_sales_wide %>% pivot_longer(cols = "Year_2020":"Year_2022", names_to = "Year", values_to = "Sales")
+product_sales_long
 ```
 3.  **Analysis in Long Format:** Using the `product_sales_long` dataset, calculate a single `Growth_Rate` column that represents the year-over-year growth for each product. You should use `group_by()` and `lag()`. The formula for growth rate is `(current_year_sales - previous_year_sales) / previous_year_sales * 100`.
 
 ```{r}
 # Your code here
+product_sales_long %>% group_by(product) %>% mutate(previous_year_sales = lag(Sales), "Growth_Rate" = (Sales - previous_year_sales) / previous_year_sales * 100)
 ```
 
 ### Short Answer
 Compare the code required to calculate the year-over-year growth rate in the wide format versus the long format. Which approach is more concise and scalable if you had many more years of data? Why is the long format generally preferred for this type of time-series calculation?
+
+The code for the long format is a formula that can be applied if more observations are added, whereas in the wide format, it is an individual calculation for each observation that would have to be done if more observations was added. The long format is generally preferred because there is less work needed to generate the time-series calculation when more observations are added.
 
 ---
 
@@ -219,14 +224,24 @@ This task explores combining student demographic information with their academic
 
 ```{r}
 # Your code for inner_join and its explanation
+students_demographics %>% inner_join(student_grades, by = "student_id")
+```
+This includes all of the students currently enrolled in courses.
 ```{r}
 # Your code for left_join and its explanation
+left <- students_demographics %>% left_join(student_grades, by = "student_id")
+left
+```
+This includes all of the students, including those that aren't enrolled in classes currently (Eve and Frank).
 ```{r}
 # Your code for advanced mutate after left join
+left %>% group_by(student_id, student_name) %>% mutate(average_grade_score = mean(grade_score))
 ```
 
 ### Short Answer
 Compare the number of rows and the content of the `inner_join()` and `left_join()` results. Specifically, identify which student(s) are present in one join but not the other, and explain why. What does the average grade calculation reveal about students with multiple grades or no grades?
+
+Eve and Frank are present in the left join but not the inner join because they are not currently enrolled in any courses. The average grade calculation shows Alice's average grade in both rows, and just says NA for Eve and Frank, who don't have any grades. 
 
 ---
 
