@@ -255,14 +255,19 @@ This task focuses on using filtering joins to identify different categories of s
 
 ```{r}
 # Your code for question 1 (semi_join)
+students_demographics %>% semi_join(student_grades, by = "student_id")
+```
 ```{r}
 # Your code for question 2 (anti_join on students_demographics)
+students_demographics %>% anti_join(student_grades, by = "student_id")
+```
 ```{r}
 # Your code for question 3 (anti_join on student_grades)
+student_grades %>% anti_join(students_demographics, by = "student_id")
 ```
 
 ### Short Answer
 Describe the distinct insights gained from each of the three filtering joins in this task. How do these joins help in data validation and understanding the completeness of your student records?
 
-
+From the first filtering join, I can see that there are only 4 students in student_demographics with current grades. From the secont filtering join, I can see the 2 students in student_demographics that do not have current grades, and from the last filtering join, I can see that there is also on student who has a current grade but does not appear in student_demographics. Together, these show all of the observations in either student_grades or student_demographics, as well as the observations that are common between the two.  
 
