@@ -1,7 +1,7 @@
 ---
 title: "Problem Set 1"
 author: "Catherine Shingler"
-date: "`r Sys.Date()`"
+date: 2025-09-08
 output: github_document
 ---
 
@@ -88,7 +88,6 @@ mtcars_processed <- mtcars %>%
 
 # Your code starts here: Filter and arrange mtcars_processed
 mtcars_processed %>% filter(cyl == 4 | cyl ==6 & mpg>20) %>% arrange(mpg, desc(cyl))
-# Your code here
 ```
 
 ### Short Answer
