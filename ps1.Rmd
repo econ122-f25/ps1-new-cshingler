@@ -225,7 +225,7 @@ This task explores combining student demographic information with their academic
 # Your code for inner_join and its explanation
 students_demographics %>% inner_join(student_grades, by = "student_id")
 ```
-This includes all of the students currently enrolled in courses.
+This includes all of the students currently enrolled in courses from the student_demographics information.
 ```{r}
 # Your code for left_join and its explanation
 left <- students_demographics %>% left_join(student_grades, by = "student_id")
